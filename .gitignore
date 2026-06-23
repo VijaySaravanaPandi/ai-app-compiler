@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+
+# Env / secrets
+.env
+
+# Generated apps output (don't commit generated artifacts)
+backend/generated_apps/*
+!backend/generated_apps/.gitkeep
+
+# Node (for generated apps later)
+node_modules/
+
+# OS / editor
+.DS_Store
+.vscode/
+*.log
