@@ -29,12 +29,6 @@ def extract_intent(request: PromptRequest):
 
 @app.post("/pipeline/design-architecture")
 def design_architecture(request: PromptRequest):
-    state = orchestrator.start(request.prompt)
-    return state.model_dump()
 
-
-@app.post("/pipeline/generate-schemas")
-def generate_schemas(request: PromptRequest):
-    """Runs the full pipeline through Stage 3 (intent + architecture + all 5 schemas)."""
     state = orchestrator.start(request.prompt)
     return state.model_dump()
