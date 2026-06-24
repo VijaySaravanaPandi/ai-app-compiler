@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+
+# Env / secrets
+.env
+
+# Generated apps output
+backend/generated_apps/*
+!backend/generated_apps/.gitkeep
+
+# Node
+node_modules/
+
+# OS / editor
+.DS_Store
+.vscode/
+*.log
