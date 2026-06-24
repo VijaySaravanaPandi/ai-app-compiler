@@ -1,6 +1,7 @@
 import uuid
 from app.schemas.pipeline_state import PipelineState, ValidationIssue
 from app.pipeline.intent_extraction import intent_extractor
+from app.pipeline.architecture_design import architecture_designer
 from app.llm.client import LLMGenerationError
 
 
@@ -12,7 +13,11 @@ class PipelineOrchestrator:
             request_id=str(uuid.uuid4()),
             raw_prompt=raw_prompt,
         )
-        return self.run_intent_stage(state)
+        state = self.run_intent_stage(state)
+        if state.status == "failed":
+            return state
+        state = self.run_architecture_stage(state)
+        return state
 
     def run_intent_stage(self, state: PipelineState) -> PipelineState:
         try:
@@ -20,11 +25,7 @@ class PipelineOrchestrator:
         except LLMGenerationError as e:
             state.status = "failed"
             state.validation_issues.append(
-                ValidationIssue(
-                    layer="intent",
-                    severity="error",
-                    message=f"Intent extraction failed: {e}",
-                )
+                ValidationIssue(layer="intent", severity="error", message=f"Intent extraction failed: {e}")
             )
             return state
 
@@ -33,13 +34,30 @@ class PipelineOrchestrator:
 
         for ambiguity in intent.ambiguities:
             state.validation_issues.append(
-                ValidationIssue(
-                    layer="intent",
-                    severity="warning",
-                    message=ambiguity,
-                )
+                ValidationIssue(layer="intent", severity="warning", message=ambiguity)
             )
 
+        return state
+
+    def run_architecture_stage(self, state: PipelineState) -> PipelineState:
+        if state.intent is None:
+            state.status = "failed"
+            state.validation_issues.append(
+                ValidationIssue(layer="architecture", severity="error", message="Cannot design architecture without intent")
+            )
+            return state
+
+        try:
+            architecture = architecture_designer.design(state.intent)
+        except LLMGenerationError as e:
+            state.status = "failed"
+            state.validation_issues.append(
+                ValidationIssue(layer="architecture", severity="error", message=f"Architecture design failed: {e}")
+            )
+            return state
+
+        state.architecture = architecture
+        state.status = "architecture_done"
         return state
 
 
