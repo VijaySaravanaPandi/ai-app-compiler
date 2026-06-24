@@ -181,35 +181,3 @@ Outputs will be saved in the root workspace folder:
 | `/compile/async` | `POST` | Asynchronous trigger. Returns a `request_id` instantly |
 | `/compile/status/{id}` | `GET` | Polls the current compile state, progress percentage, and schema updates |
 | `/apps/{id}/download` | `GET` | Returns a compiled `.zip` file of the Node.js application |
-
----
-
-## 🎥 Loom Video Presentation Outline (5-10 Minutes)
-
-Use this outline to record a high-scoring Loom video submission:
-
-### 1. Introduction (0:00 - 1:00)
-* Introduce yourself and state the core objective: building an **engineered compiler** (not a prompt engineering trick) that converts natural language to runnable apps.
-* Present the live UI dashboard with custom dark glassmorphism and the pipeline tracker.
-
-### 2. Architecture & Pipeline Design (1:00 - 3:00)
-* Explain **why a multi-stage approach** is mandatory: context limits, logical drift, and schema consistency.
-* Briefly walk through the files: `Clarification Engine -> Intent -> Architecture -> Schemas -> Local Refinement -> Validation/Repair -> Codegen`.
-* Highlight the local programmatic **Refinement Layer** which aligns endpoints and databases without paying LLM token costs.
-
-### 3. The Core: Validation & Repair Engine (3:00 - 5:00)
-* Walk through `backend/app/pipeline/validation_repair.py`.
-* Show how schema checks against Pydantic models are captured.
-* Explain the **Self-Repair Loop**: how validation errors (JSON schema violations, type mismatch) are fed back into targeted LLM prompts to self-heal.
-* Show the deterministic **Stage 0 Clarification** guard preventing vague requests from consuming LLM cost.
-
-### 4. Tradeoffs & Cost vs. Quality (5:00 - 7:00)
-* Discuss the analysis in `TRADEOFFS.md`.
-* Explain why **Llama 3.3 70B on Groq** was chosen: ~80 tokens/sec speed combined with sub-cent cost per application compilation (~$0.0098) compared to Claude or GPT-4o.
-* Detail how Pydantic type safety + local codegen templates compensate for model size constraints to guarantee executable output.
-
-### 5. Demo & Runtime Validation (7:00 - 9:00)
-* Put a complex prompt in the UI (e.g. CRM with payment tiers and admin analytics).
-* Walk through the real-time progress tracker.
-* Review the compiled JSON output tabs (UI, DB, API, Auth, Logic) showcasing syntax highlighting.
-* Download the `.zip` file, extract, and briefly show the generated Express/SQLite code proving **execution awareness**.
