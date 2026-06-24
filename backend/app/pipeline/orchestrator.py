@@ -2,6 +2,8 @@ import uuid
 from app.schemas.pipeline_state import PipelineState, ValidationIssue
 from app.pipeline.intent_extraction import intent_extractor
 from app.pipeline.architecture_design import architecture_designer
+from app.pipeline.schema_generation import schema_generator
+from app.pipeline.refinement import refinement_engine
 from app.llm.client import LLMGenerationError
 
 
@@ -16,7 +18,16 @@ class PipelineOrchestrator:
         state = self.run_intent_stage(state)
         if state.status == "failed":
             return state
+
         state = self.run_architecture_stage(state)
+        if state.status == "failed":
+            return state
+
+        state = self.run_schema_generation_stage(state)
+        if state.status == "failed":
+            return state
+
+        state = self.run_refinement_stage(state)
         return state
 
     def run_intent_stage(self, state: PipelineState) -> PipelineState:
@@ -59,6 +70,43 @@ class PipelineOrchestrator:
         state.architecture = architecture
         state.status = "architecture_done"
         return state
+
+    def run_schema_generation_stage(self, state: PipelineState) -> PipelineState:
+        if state.architecture is None:
+            state.status = "failed"
+            state.validation_issues.append(
+                ValidationIssue(layer="cross_layer", severity="error", message="Cannot generate schemas without architecture")
+            )
+            return state
+
+        generators = {
+            "ui": schema_generator.generate_ui,
+            "api": schema_generator.generate_api,
+            "db": schema_generator.generate_db,
+            "auth": schema_generator.generate_auth,
+            "business_logic": schema_generator.generate_business_logic,
+        }
+
+        any_failed = False
+        for layer_name, generator_fn in generators.items():
+            try:
+                result = generator_fn(state.architecture)
+                setattr(state, layer_name, result)
+            except LLMGenerationError as e:
+                any_failed = True
+                state.validation_issues.append(
+                    ValidationIssue(
+                        layer=layer_name,
+                        severity="error",
+                        message=f"{layer_name} schema generation failed: {e}",
+                    )
+                )
+
+        state.status = "failed" if any_failed else "schemas_done"
+        return state
+
+    def run_refinement_stage(self, state: PipelineState) -> PipelineState:
+        return refinement_engine.refine(state)
 
 
 orchestrator = PipelineOrchestrator()
