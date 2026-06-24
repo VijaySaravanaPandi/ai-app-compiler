@@ -123,14 +123,7 @@ def compile_status(request_id: str):
     state = _pipeline_status.get(request_id)
     if state is None:
         raise HTTPException(status_code=404, detail="request_id not found")
-    return {
-        "request_id": request_id,
-        "status": state.status,
-        "needs_clarification": state.needs_clarification,
-        "clarification_questions": state.clarification_questions,
-        "validation_issues": [i.model_dump() for i in state.validation_issues],
-        "generated_app_path": state.generated_app_path,
-    }
+    return state.model_dump()
 
 
 @app.get("/apps/{request_id}/download", tags=["Codegen"])
@@ -156,6 +149,6 @@ def download_app(request_id: str):
 
 
 # ── Frontend static files ─────────────────────────────────────────────────────
-_FRONTEND_DIR = Path(__file__).parent.parent.parent.parent / "frontend"
+_FRONTEND_DIR = Path(__file__).parent.parent.parent / "frontend"
 if _FRONTEND_DIR.exists():
     app.mount("/", StaticFiles(directory=str(_FRONTEND_DIR), html=True), name="frontend")
