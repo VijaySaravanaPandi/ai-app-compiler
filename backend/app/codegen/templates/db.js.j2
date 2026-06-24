@@ -1,0 +1,31 @@
+const Database = require('better-sqlite3');
+const path = require('path');
+
+const DB_PATH = path.join(__dirname, 'data.sqlite');
+let db;
+
+function getDb() {
+  if (!db) {
+    db = new Database(DB_PATH);
+    db.pragma('journal_mode = WAL');
+    db.pragma('foreign_keys = ON');
+  }
+  return db;
+}
+
+function initDb() {
+  const database = getDb();
+
+  database.exec(`
+{% for table in tables %}
+    CREATE TABLE IF NOT EXISTS {{ table.name }} (
+      {% for col in table.columns %}{{ col.name }} {{ col.sql_type }}{% if col.primary_key %} PRIMARY KEY{% endif %}{% if col.not_null %} NOT NULL{% endif %}{% if col.default is not none %} DEFAULT {{ col.default }}{% endif %}{% if not loop.last %},{% endif %}
+
+      {% endfor %}
+    );
+{% endfor %}
+  `);
+  console.log('[DB] Tables initialised.');
+}
+
+module.exports = { getDb, initDb };
