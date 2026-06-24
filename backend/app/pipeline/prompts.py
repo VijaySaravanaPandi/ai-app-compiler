@@ -9,17 +9,16 @@ Extraction rules:
 2. app_name: a short Title Case name. If the user did not name the app, infer a sensible one from app_type.
 3. core_features: list every explicit, concrete feature mentioned in the prompt. Use short noun phrases.
 4. entities_mentioned: nouns implying persisted data objects (e.g. "contact", "order", "product").
-   Always lowercase and singular.
 5. roles_mentioned: every role or persona named or clearly implied (e.g. "admin", "user", "manager").
-   If none are mentioned at all, default to ["user"].
-6. has_auth: true if login, accounts, authentication, or role-based access is mentioned or implied.
-7. has_payments: true if billing, payments, premium plans, or subscriptions are mentioned.
-8. has_admin_analytics: true if analytics, reporting, or dashboards are mentioned for an admin/manager role.
-9. ambiguities: concrete list of things the prompt left underspecified (be specific, not generic).
-10. assumptions_made: for every ambiguity you are not going to block on, state the reasonable
+6. If none are mentioned at all, default to ["user"].
+7. has_auth: true if login, accounts, authentication, or role-based access is mentioned or implied.
+8. has_payments: true if billing, payments, premium plans, or subscriptions are mentioned.
+9. has_admin_analytics: true if analytics, reporting, or dashboards are mentioned for an admin/manager role.
+10. ambiguities: concrete list of things the prompt left underspecified (be specific, not generic).
+11. assumptions_made: for every ambiguity you are not going to block on, state the reasonable
     default you are assuming instead. Every ambiguity should usually have a matching assumption
     unless it is severe enough to require user clarification.
-11. raw_input: copy the user's original input back exactly, character for character.
+12. raw_input: copy the user's original input back exactly, character for character.
 
 Example:
 
@@ -72,5 +71,3 @@ Design rules:
    concretely in entities, roles, or flows as appropriate.
 
 Respond with ONLY the JSON object — no preamble, no markdown fences, no explanation.
-
-"""
