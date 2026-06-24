@@ -107,7 +107,43 @@ class ValidationRepairEngine:
             return False
 
         # Replace the problematic layer with the repaired version.
-        setattr(state, issue.layer, repaired_obj)
+        try:
+            if issue.layer == "ui":
+                from app.schemas.ui_schema import UISchema
+                validated_obj = UISchema.model_validate(repaired_obj)
+            elif issue.layer == "api":
+                from app.schemas.api_schema import APISchema
+                validated_obj = APISchema.model_validate(repaired_obj)
+            elif issue.layer == "db":
+                from app.schemas.db_schema import DBSchema
+                validated_obj = DBSchema.model_validate(repaired_obj)
+            elif issue.layer == "auth":
+                from app.schemas.auth_schema import AuthSchema
+                validated_obj = AuthSchema.model_validate(repaired_obj)
+            elif issue.layer == "business_logic":
+                from app.schemas.business_logic import BusinessLogicSchema
+                validated_obj = BusinessLogicSchema.model_validate(repaired_obj)
+            elif issue.layer == "architecture":
+                from app.schemas.architecture import ArchitectureSchema
+                validated_obj = ArchitectureSchema.model_validate(repaired_obj)
+            elif issue.layer == "intent":
+                from app.schemas.intent import IntentSchema
+                validated_obj = IntentSchema.model_validate(repaired_obj)
+            else:
+                validated_obj = repaired_obj
+        except Exception as e:
+            state.repair_log.append(
+                RepairLogEntry(
+                    timestamp=datetime.utcnow().isoformat(),
+                    layer=issue.layer,
+                    issue=f"Repaired JSON failed schema validation: {e}",
+                    action="failed",
+                    attempt=1,
+                )
+            )
+            return False
+
+        setattr(state, issue.layer, validated_obj)
         # Log the successful repair.
         state.repair_log.append(
             RepairLogEntry(
