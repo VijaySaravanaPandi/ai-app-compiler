@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI App Compiler — Natural Language to Running App</title>
+  <meta name="description" content="Transform natural language descriptions into fully structured, validated, and executable application configurations using the AI App Compiler pipeline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ── Header ────────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">AI App Compiler</span>
+        <span class="logo-badge">v1.0</span>
+      </div>
+      <nav class="nav">
+        <a href="#demo" class="nav-link">Demo</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="https://github.com/VijaySaravanaPandi/ai-app-compiler" target="_blank" class="nav-link nav-github">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="container">
+      <div class="hero-badge">🤖 Multi-Stage Compiler Pipeline</div>
+      <h1 class="hero-title">Natural Language<br /><span class="gradient-text">→ Running App</span></h1>
+      <p class="hero-sub">
+        The AI App Compiler converts your description into a fully validated, executable
+        Node.js application — complete with database schema, API routes, auth, and business logic.
+      </p>
+      <div class="pipeline-stages" id="how-it-works">
+        <div class="stage" data-stage="0">
+          <div class="stage-icon">🔍</div>
+          <div class="stage-label">Clarification</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" data-stage="1">
+          <div class="stage-icon">🧠</div>
+          <div class="stage-label">Intent</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" data-stage="2">
+          <div class="stage-icon">🏗️</div>
+          <div class="stage-label">Architecture</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" data-stage="3">
+          <div class="stage-icon">📐</div>
+          <div class="stage-label">Schemas</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" data-stage="4">
+          <div class="stage-icon">🔧</div>
+          <div class="stage-label">Repair</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" data-stage="5">
+          <div class="stage-icon">⚙️</div>
+          <div class="stage-label">Codegen</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Demo ──────────────────────────────────────────────────────────────── -->
+  <section class="demo-section" id="demo">
+    <div class="container">
+      <div class="demo-card glass">
+        <!-- Input -->
+        <div class="input-area">
+          <label class="input-label" for="prompt-input">
+            Describe your application
+            <span class="input-hint">Be specific — mention features, roles, entities</span>
+          </label>
+          <div class="textarea-wrapper">
+            <textarea
+              id="prompt-input"
+              class="prompt-input"
+              rows="5"
+              placeholder="e.g. Build a CRM with login, contacts, dashboard, role-based access, and premium plan with payments. Admins can see analytics."
+            ></textarea>
+            <div class="char-counter" id="char-counter">0 / 2000</div>
+          </div>
+          <!-- Example chips -->
+          <div class="examples">
+            <span class="examples-label">Try:</span>
+            <button class="chip" data-example="crm">CRM</button>
+            <button class="chip" data-example="blog">Blog</button>
+            <button class="chip" data-example="ecommerce">E-commerce</button>
+            <button class="chip" data-example="booking">Booking</button>
+          </div>
+          <button id="compile-btn" class="compile-btn" onclick="startCompile()">
+            <span class="compile-btn-text">⚡ Compile App</span>
+            <span class="compile-btn-spinner" hidden>
+              <span class="spinner"></span> Compiling...
+            </span>
+          </button>
+        </div>
+
+        <!-- Progress -->
+        <div id="progress-area" class="progress-area" hidden>
+          <div class="progress-label">
+            <span id="progress-stage-name">Initialising…</span>
+            <span id="progress-pct">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+          </div>
+          <div class="pipeline-tracker" id="pipeline-tracker">
+            <div class="tracker-stage" id="ts-0">🔍 Clarification</div>
+            <div class="tracker-stage" id="ts-1">🧠 Intent</div>
+            <div class="tracker-stage" id="ts-2">🏗️ Architecture</div>
+            <div class="tracker-stage" id="ts-3">📐 Schemas</div>
+            <div class="tracker-stage" id="ts-4">🔧 Repair</div>
+            <div class="tracker-stage" id="ts-5">⚙️ Codegen</div>
+          </div>
+        </div>
+
+        <!-- Clarification notice -->
+        <div id="clarification-area" class="clarification-area" hidden>
+          <h3 class="clarif-title">⚠️ We need clarification</h3>
+          <ul id="clarif-questions" class="clarif-list"></ul>
+          <p class="clarif-hint">Please update your prompt above to address these, then click Compile again.</p>
+        </div>
+
+        <!-- Error notice -->
+        <div id="error-area" class="error-area" hidden>
+          <h3 class="error-title">❌ Compilation failed</h3>
+          <ul id="error-list" class="error-list"></ul>
+        </div>
+
+        <!-- Results -->
+        <div id="result-area" class="result-area" hidden>
+          <div class="result-header">
+            <div class="result-status">
+              <span class="status-dot success"></span>
+              <span id="result-status-text">Compiled successfully</span>
+            </div>
+            <div class="result-actions">
+              <button class="action-btn" onclick="copyJSON()" id="copy-btn">📋 Copy JSON</button>
+              <button class="action-btn action-btn-primary" id="download-btn" onclick="downloadApp()" hidden>
+                ⬇️ Download App
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab switcher -->
+          <div class="tabs">
+            <button class="tab active" data-tab="intent" onclick="switchTab('intent',this)">Intent</button>
+            <button class="tab" data-tab="architecture" onclick="switchTab('architecture',this)">Architecture</button>
+            <button class="tab" data-tab="ui" onclick="switchTab('ui',this)">UI</button>
+            <button class="tab" data-tab="api" onclick="switchTab('api',this)">API</button>
+            <button class="tab" data-tab="db" onclick="switchTab('db',this)">Database</button>
+            <button class="tab" data-tab="auth" onclick="switchTab('auth',this)">Auth</button>
+            <button class="tab" data-tab="business_logic" onclick="switchTab('business_logic',this)">Logic</button>
+            <button class="tab" data-tab="raw" onclick="switchTab('raw',this)">Raw JSON</button>
+          </div>
+
+          <div class="json-viewer" id="json-viewer">
+            <pre id="json-output" class="json-pre"></pre>
+          </div>
+
+          <!-- Stats bar -->
+          <div class="stats-bar" id="stats-bar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <p>Built with ⚡ by <strong>AI App Compiler</strong> — Natural language → production-ready app configs</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
