@@ -43,9 +43,13 @@ class PipelineState(BaseModel):
     validation_issues: List[ValidationIssue] = Field(default_factory=list)
     repair_log: List[RepairLogEntry] = Field(default_factory=list)
 
+    # Set by CodegenEngine once the Node.js project is written to disk
+    generated_app_path: Optional[str] = None
+
     status: Literal[
         "pending", "intent_done", "architecture_done", "schemas_done",
-        "refined", "validated", "repaired", "failed", "needs_clarification", "complete"
+        "refined", "validated", "repaired", "failed", "needs_clarification",
+        "codegen_done", "complete"
     ] = "pending"
 
     needs_clarification: bool = False
