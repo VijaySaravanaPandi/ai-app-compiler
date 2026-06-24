@@ -4,6 +4,7 @@ from app.pipeline.intent_extraction import intent_extractor
 from app.pipeline.architecture_design import architecture_designer
 from app.pipeline.schema_generation import schema_generator
 from app.pipeline.refinement import refinement_engine
+from app.pipeline.clarification import clarification_engine
 from app.llm.client import LLMGenerationError
 from app.codegen.generator import codegen_engine
 
@@ -16,6 +17,11 @@ class PipelineOrchestrator:
             request_id=str(uuid.uuid4()),
             raw_prompt=raw_prompt,
         )
+        # Stage 0: Clarification guard (deterministic, no LLM)
+        state = self.run_clarification_stage(state)
+        if state.needs_clarification:
+            return state
+
         # Stage 1: Intent Extraction
         state = self.run_intent_stage(state)
         if state.status == "failed":
@@ -123,6 +129,10 @@ class PipelineOrchestrator:
 
         state.status = "failed" if any_failed else "schemas_done"
         return state
+
+    def run_clarification_stage(self, state: PipelineState) -> PipelineState:
+        """Stage 0 — Deterministic clarification guard (no LLM cost)."""
+        return clarification_engine.check(state)
 
     def run_refinement_stage(self, state: PipelineState) -> PipelineState:
         return refinement_engine.refine(state)
