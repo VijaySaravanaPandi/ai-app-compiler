@@ -79,6 +79,9 @@ class PipelineOrchestrator:
             )
             return state
 
+        # Each layer is generated independently. If one fails, record it and continue
+        # with the others rather than aborting the whole stage — this is what lets the
+        # repair engine (next phase) target only the broken layer later.
         generators = {
             "ui": schema_generator.generate_ui,
             "api": schema_generator.generate_api,
