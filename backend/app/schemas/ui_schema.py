@@ -9,7 +9,7 @@ class Component(BaseModel):
     api_binding: Optional[str] = Field(None, description="API endpoint path this component reads/writes")
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class Page(BaseModel):
@@ -20,7 +20,7 @@ class Page(BaseModel):
     access_roles: List[str] = Field(default_factory=lambda: ["any"])
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class UISchema(BaseModel):
@@ -29,4 +29,4 @@ class UISchema(BaseModel):
     pages: List[Page]
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"

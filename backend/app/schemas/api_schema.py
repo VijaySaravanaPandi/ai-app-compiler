@@ -7,7 +7,7 @@ class FieldValidation(BaseModel):
     rule: str
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class Endpoint(BaseModel):
@@ -21,7 +21,7 @@ class Endpoint(BaseModel):
     maps_to_entity: Optional[str] = None
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class APISchema(BaseModel):
@@ -30,4 +30,4 @@ class APISchema(BaseModel):
     endpoints: List[Endpoint]
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"

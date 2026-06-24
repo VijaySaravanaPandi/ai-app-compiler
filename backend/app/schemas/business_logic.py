@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 
 
 class BusinessRule(BaseModel):
@@ -7,9 +7,12 @@ class BusinessRule(BaseModel):
     condition: str
     action: str
     applies_to_role: str = "any"
+    description: Optional[str] = None
+    trigger: Optional[str] = None
+    affected_roles: Optional[List[str]] = None
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class BusinessLogicSchema(BaseModel):
@@ -18,4 +21,4 @@ class BusinessLogicSchema(BaseModel):
     rules: List[BusinessRule]
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"

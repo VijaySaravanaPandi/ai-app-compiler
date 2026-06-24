@@ -8,9 +8,11 @@ class Column(BaseModel):
     primary_key: bool = False
     foreign_key: Optional[str] = Field(None, description="e.g. 'users.id'")
     nullable: bool = True
+    required: bool = False
+    unique: bool = False
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class Table(BaseModel):
@@ -18,7 +20,7 @@ class Table(BaseModel):
     columns: List[Column]
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class DBSchema(BaseModel):
@@ -27,4 +29,4 @@ class DBSchema(BaseModel):
     tables: List[Table]
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"

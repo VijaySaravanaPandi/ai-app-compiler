@@ -18,4 +18,4 @@ class IntentSchema(BaseModel):
     raw_input: str = Field(..., description="Original user prompt, verbatim")
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
