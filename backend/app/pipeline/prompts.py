@@ -72,4 +72,5 @@ Design rules:
    concretely in entities, roles, or flows as appropriate.
 
 Respond with ONLY the JSON object — no preamble, no markdown fences, no explanation.
+
 """

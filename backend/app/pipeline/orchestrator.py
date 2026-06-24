@@ -2,6 +2,7 @@ import uuid
 from app.schemas.pipeline_state import PipelineState, ValidationIssue
 from app.pipeline.intent_extraction import intent_extractor
 from app.pipeline.architecture_design import architecture_designer
+
 from app.llm.client import LLMGenerationError
 
 
@@ -16,7 +17,7 @@ class PipelineOrchestrator:
         state = self.run_intent_stage(state)
         if state.status == "failed":
             return state
-        state = self.run_architecture_stage(state)
+
         return state
 
     def run_intent_stage(self, state: PipelineState) -> PipelineState:
@@ -56,8 +57,6 @@ class PipelineOrchestrator:
             )
             return state
 
-        state.architecture = architecture
-        state.status = "architecture_done"
         return state
 
 

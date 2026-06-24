@@ -29,6 +29,6 @@ def extract_intent(request: PromptRequest):
 
 @app.post("/pipeline/design-architecture")
 def design_architecture(request: PromptRequest):
-    """Runs the full pipeline through Stage 2 (intent + architecture)."""
+
     state = orchestrator.start(request.prompt)
     return state.model_dump()
