@@ -1,0 +1,301 @@
+{
+  "metadata": {
+    "mode": "mock",
+    "timestamp": "Wed Jun 24 17:12:52 2026",
+    "total_prompts": 20
+  },
+  "metrics": {
+    "success_rate": 60.0,
+    "clarification_rate": 25.0,
+    "failure_rate": 15.0,
+    "avg_latency_ms": 1227.0,
+    "avg_latency_real_ms": 896.2,
+    "total_repair_loops": 7,
+    "avg_repairs_real": 0.0,
+    "total_cost_usd": 0.277,
+    "avg_cost_per_prompt_usd": 0.0139
+  },
+  "failure_breakdown": {
+    "none": 12,
+    "vague_clarification": 4,
+    "logical_conflict": 3,
+    "incomplete_clarification": 1
+  },
+  "results": [
+    {
+      "prompt_id": "real-crm",
+      "category": "real",
+      "prompt": "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with payments. Admins can see analytics.",
+      "status": "success",
+      "latency_ms": 1005,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-blog",
+      "category": "real",
+      "prompt": "Create a personal blog where an admin can write, edit, and delete posts. Regular users can sign up, read posts, and leave comments.",
+      "status": "success",
+      "latency_ms": 710,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-ecommerce",
+      "category": "real",
+      "prompt": "Build an e-commerce platform with a product catalog, search functionality, shopping cart, customer checkout flow, and merchant order management dashboard.",
+      "status": "success",
+      "latency_ms": 742,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-booking",
+      "category": "real",
+      "prompt": "Build a medical clinic booking app. Patients can view doctor schedules, book appointments, and pay fees. Doctors can view patient files and update status.",
+      "status": "success",
+      "latency_ms": 1304,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-lms",
+      "category": "real",
+      "prompt": "Build an LMS portal where instructors can upload courses, lessons, and quizzes. Students can enroll, track their progress, and take quizzes.",
+      "status": "success",
+      "latency_ms": 1028,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-helpdesk",
+      "category": "real",
+      "prompt": "Create a help desk system where customers submit support tickets. Support agents can assign tickets, update status (open, pending, closed), and reply.",
+      "status": "success",
+      "latency_ms": 501,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-fitness",
+      "category": "real",
+      "prompt": "Build a fitness tracker where users log daily workouts, exercises, reps, and weights. Users can view progress charts and set weekly goals.",
+      "status": "success",
+      "latency_ms": 1145,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-inventory",
+      "category": "real",
+      "prompt": "Build an inventory management system. Managers can add products, track stock counts, set low-stock alerts, and log supplier shipments.",
+      "status": "success",
+      "latency_ms": 1166,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-expense",
+      "category": "real",
+      "prompt": "Build a company expense manager. Employees submit expense receipts, managers approve or reject them, and finance admins view aggregated reports.",
+      "status": "success",
+      "latency_ms": 802,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "real-realestate",
+      "category": "real",
+      "prompt": "Create a real estate portal. Agents can list properties with prices, locations, and photos. Buyers can search, filter by price range, and submit inquiry messages.",
+      "status": "success",
+      "latency_ms": 559,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.015,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "edge-vague-1",
+      "category": "vague",
+      "prompt": "make a web app",
+      "status": "needs_clarification",
+      "latency_ms": 94,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "vague_clarification",
+      "cost_usd": 0.0005,
+      "needs_clarification": true,
+      "clarification_questions": [
+        "Can you specify the core business entity?",
+        "What user roles should access this page?"
+      ]
+    },
+    {
+      "prompt_id": "edge-vague-2",
+      "category": "vague",
+      "prompt": "Build something cool for my business",
+      "status": "needs_clarification",
+      "latency_ms": 113,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "vague_clarification",
+      "cost_usd": 0.0005,
+      "needs_clarification": true,
+      "clarification_questions": [
+        "Can you specify the core business entity?",
+        "What user roles should access this page?"
+      ]
+    },
+    {
+      "prompt_id": "edge-vague-3",
+      "category": "vague",
+      "prompt": "CRM",
+      "status": "needs_clarification",
+      "latency_ms": 113,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "vague_clarification",
+      "cost_usd": 0.0005,
+      "needs_clarification": true,
+      "clarification_questions": [
+        "Can you specify the core business entity?",
+        "What user roles should access this page?"
+      ]
+    },
+    {
+      "prompt_id": "edge-vague-4",
+      "category": "vague",
+      "prompt": "Write code for a database system",
+      "status": "needs_clarification",
+      "latency_ms": 68,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "vague_clarification",
+      "cost_usd": 0.0005,
+      "needs_clarification": true,
+      "clarification_questions": [
+        "Can you specify the core business entity?",
+        "What user roles should access this page?"
+      ]
+    },
+    {
+      "prompt_id": "edge-conflict-1",
+      "category": "conflict",
+      "prompt": "Build a secure blog where anyone can edit, update, and delete any post without logging in, but only logged-in users can view posts.",
+      "status": "failed",
+      "latency_ms": 3900,
+      "repair_attempts": 2,
+      "validation_issues": 1,
+      "failure_type": "logical_conflict",
+      "cost_usd": 0.032,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "edge-conflict-2",
+      "category": "conflict",
+      "prompt": "Create a hospital portal where doctors can never see patient files, but patients can view all patient records in the entire hospital.",
+      "status": "failed",
+      "latency_ms": 4303,
+      "repair_attempts": 2,
+      "validation_issues": 2,
+      "failure_type": "logical_conflict",
+      "cost_usd": 0.032,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "edge-conflict-3",
+      "category": "conflict",
+      "prompt": "Build a subscription SaaS platform that charges users a monthly fee but has no payment options and doesn't allow storing card details or bank details.",
+      "status": "failed",
+      "latency_ms": 3823,
+      "repair_attempts": 2,
+      "validation_issues": 1,
+      "failure_type": "logical_conflict",
+      "cost_usd": 0.032,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "edge-incomplete-1",
+      "category": "incomplete",
+      "prompt": "Build a SaaS app with subscription billing.",
+      "status": "success",
+      "latency_ms": 1383,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.012,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "edge-incomplete-2",
+      "category": "incomplete",
+      "prompt": "Create a portal for users to check in.",
+      "status": "success",
+      "latency_ms": 1590,
+      "repair_attempts": 1,
+      "validation_issues": 0,
+      "failure_type": "none",
+      "cost_usd": 0.016,
+      "needs_clarification": false,
+      "clarification_questions": []
+    },
+    {
+      "prompt_id": "edge-incomplete-3",
+      "category": "incomplete",
+      "prompt": "Build a messaging room with users.",
+      "status": "needs_clarification",
+      "latency_ms": 191,
+      "repair_attempts": 0,
+      "validation_issues": 0,
+      "failure_type": "incomplete_clarification",
+      "cost_usd": 0.001,
+      "needs_clarification": true,
+      "clarification_questions": [
+        "Which payment gateways should be configured?",
+        "Describe the layout of the check-in screen."
+      ]
+    }
+  ]
+}
