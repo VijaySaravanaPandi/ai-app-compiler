@@ -9,7 +9,7 @@ class EntityField(BaseModel):
     enum_values: List[str] = Field(default_factory=list)
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class EntityRelation(BaseModel):
@@ -18,7 +18,7 @@ class EntityRelation(BaseModel):
     via_field: str
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class Entity(BaseModel):
@@ -27,7 +27,7 @@ class Entity(BaseModel):
     relations: List[EntityRelation] = Field(default_factory=list)
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class Role(BaseModel):
@@ -36,7 +36,7 @@ class Role(BaseModel):
     permissions: List[str] = Field(default_factory=list)
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class Flow(BaseModel):
@@ -45,7 +45,7 @@ class Flow(BaseModel):
     triggered_by_role: str = "any"
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
 
 
 class ArchitectureSchema(BaseModel):
@@ -57,4 +57,4 @@ class ArchitectureSchema(BaseModel):
     pages_needed: List[str] = Field(default_factory=list)
 
     class Config:
-        extra = "forbid"
+        extra = "ignore"
