@@ -1,0 +1,23 @@
+# docker-compose.yml
+# ==================
+# Orchestrates building and running the AI App Compiler.
+# Make sure to set your GROQ_API_KEY in backend/.env or your environment before running.
+
+version: '3.8'
+
+services:
+  app-compiler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai_app_compiler_service
+    ports:
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - MODEL_NAME=llama-3.3-70b-versatile
+      - GENERATED_APPS_DIR=/app/generated_apps
+    volumes:
+      # Mount directory to persist generated applications locally
+      - ./generated_apps:/app/generated_apps
+    restart: unless-stopped
